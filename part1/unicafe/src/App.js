@@ -42,12 +42,12 @@ const App = () => {
       <Button onClick={increase('good')} text={'good'} />
       <Button onClick={increase('neutral')} text={'neutral'} />
       <Button onClick={increase('bad')} text={'bad'} />
-      <Heading text="statistics" />
-      <Statistic type="good" count={good} />
-      <Statistic type="neutral" count={neutral} />
-      <Statistic type="bad" count={bad} />
-      <Statistic type="all" count={allClicks} />
-      <Statistic type="average" count={average} />
+      <Heading text="Statistics" />
+      <Statistics type="good" count={good} />
+      <Statistics type="neutral" count={neutral} />
+      <Statistics type="bad" count={bad} />
+      <Statistics type="all" count={allClicks} />
+      <Statistics type="average" count={average} />
     </div>
   )
 }
@@ -60,7 +60,7 @@ const Button = ({onClick, text}) => (
   <button onClick={onClick}>{text}</button>
 )
 
-const Statistic = ({type, count}) => (
+const Statistics = ({type, count}) => (
   <p>{type} {count}</p>
 )
 
