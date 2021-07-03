@@ -12,6 +12,7 @@ const App = () => {
   ]
    
   const [selected, setSelected] = useState(0)
+  const [mostVoted, setMostVoted] = useState(0)
   const [votes, setVotes] = useState([0,0,0,0,0,0,0])
 
   // event handlers
@@ -20,21 +21,29 @@ const App = () => {
     setSelected(randomNum)
   }
   const vote = () => {
-    const newVotes = { ...votes }
+    const newVotes = [ ...votes ]
     newVotes[selected] += 1
     setVotes(newVotes)
+    setMostVoted(newVotes.indexOf(Math.max(...newVotes)))
   }
 
   return (
     <div>
+      <Heading text='Anecdote of the day' />
       {anecdotes[selected]}
       <br></br>
       <p>has {votes[selected]} votes</p>
       <Button text='vote' handleClick={vote} />
       <Button text='next anecdote' handleClick={randomiseSelected} />
+      <Heading text='Anecdote with the most votes' />
+      {anecdotes[mostVoted]}
     </div>
   )
 }
+
+const Heading = ({text}) => (
+  <h1>{text}</h1>
+)
 
 const Button = ({text, handleClick}) => (
     <button onClick={handleClick}>{text}</button>
