@@ -7,6 +7,7 @@ const App = () => {
   const [bad, setBad] = useState(0)
   const [allClicks, setAllClicks] = useState(0)
   const [average, setAverage] = useState(0)
+  const [percentGood, setPercentGood] = useState(0)
 
   // event handlers
   const increaseAllClicks = () => {
@@ -18,6 +19,7 @@ const App = () => {
         setGood(good + 1)
         increaseAllClicks()
         setAverage((good + 1 - bad) / (allClicks + 1))
+        setPercentGood(((good + 1) / (allClicks + 1))*100)
       }
     }
     else if (feedback === 'neutral') {
@@ -25,6 +27,7 @@ const App = () => {
         setNeutral(neutral + 1)
         increaseAllClicks()
         setAverage((good - bad) / (allClicks + 1))
+        setPercentGood((good / (allClicks + 1))*100)
       }
     }
     else if (feedback === 'bad') {
@@ -32,6 +35,7 @@ const App = () => {
         setBad(bad + 1)
         increaseAllClicks()
         setAverage((good - bad - 1) / (allClicks + 1))
+        setPercentGood((good / (allClicks + 1))*100)
       }
     }
   }
@@ -42,12 +46,8 @@ const App = () => {
       <Button onClick={increase('good')} text={'good'} />
       <Button onClick={increase('neutral')} text={'neutral'} />
       <Button onClick={increase('bad')} text={'bad'} />
-      <Heading text="Statistics" />
-      <Statistics type="good" count={good} />
-      <Statistics type="neutral" count={neutral} />
-      <Statistics type="bad" count={bad} />
-      <Statistics type="all" count={allClicks} />
-      <Statistics type="average" count={average} />
+      <Heading text="statistics" />
+      <Statistics good={good} neutral={neutral} bad={bad} all={allClicks} average={average} percent={percentGood} />
     </div>
   )
 }
@@ -60,8 +60,24 @@ const Button = ({onClick, text}) => (
   <button onClick={onClick}>{text}</button>
 )
 
-const Statistics = ({type, count}) => (
+const Statistics = (props) => {
+  const {good, neutral, bad, all, average, percent} = props
+  return (
+    <div>
+      <Statistic type={'good'} count={good} />
+      <Statistic type={'neutral'} count={neutral} />
+      <Statistic type={'bad'} count={bad} />
+      <Statistic type={'all'} count={all} />
+      <Statistic type={'averge'} count={average} />
+      <Percentage count={percent} />
+    </div>
+  )
+}
+const Statistic = ({type, count}) => (
   <p>{type} {count}</p>
+)
+const Percentage = ({count}) => (
+  <p>percentage {count} %</p>
 )
 
 export default App
