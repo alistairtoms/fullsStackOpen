@@ -62,6 +62,13 @@ const Button = ({onClick, text}) => (
 
 const Statistics = (props) => {
   const {good, neutral, bad, all, average, percent} = props
+  if (all === 0) {
+    return (
+      <div>
+        <p>No feedback given</p>
+      </div>
+    )
+  }
   return (
     <div>
       <Statistic type={'good'} count={good} />
