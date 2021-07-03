@@ -70,21 +70,35 @@ const Statistics = (props) => {
     )
   }
   return (
-    <div>
-      <Statistic type={'good'} count={good} />
-      <Statistic type={'neutral'} count={neutral} />
-      <Statistic type={'bad'} count={bad} />
-      <Statistic type={'all'} count={all} />
-      <Statistic type={'averge'} count={average} />
-      <Percentage count={percent} />
-    </div>
+    <table>
+      <tbody>
+        <Statistic type={'good'} count={good} />
+        <Statistic type={'neutral'} count={neutral} />
+        <Statistic type={'bad'} count={bad} />
+        <Statistic type={'all'} count={all} />
+        <Statistic type={'average'} count={average} />
+        <Percentage count={percent} />
+      </tbody>
+    </table>
   )
 }
-const Statistic = ({type, count}) => (
-  <p>{type} {count}</p>
-)
-const Percentage = ({count}) => (
-  <p>percentage {count} %</p>
-)
+
+const Statistic = ({type, count}) => {
+  return (
+    <tr>
+      <td>{type} </td>
+      <td> {count}</td>
+    </tr>
+  )
+}
+
+const Percentage = ({count}) => {
+  return (
+    <tr>
+      <td>positive</td>
+      <td> {count} %</td>
+    </tr>
+  )
+}
 
 export default App
